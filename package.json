@@ -1,0 +1,44 @@
+{
+  "name": "dk-korea-health-mcp",
+  "version": "0.1.0",
+  "description": "대한민국 공공 의료 데이터(data.go.kr)를 MCP로 조회하는 서버",
+  "type": "module",
+  "bin": {
+    "korea-health-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "data.go.kr",
+    "korea",
+    "health",
+    "medical"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.22.2",
+    "fast-xml-parser": "^4.5.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.25",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.2"
+  }
+}

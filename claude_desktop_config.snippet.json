@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "korea-health": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/korea-health-mcp-server/dist/index.js"
+      ]
+    }
+  }
+}
