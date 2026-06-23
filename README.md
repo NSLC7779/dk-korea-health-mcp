@@ -4,6 +4,31 @@
 
 > 상태: **구현 완료 · 7개 도구 전부 실제 키로 라이브 검증됨**(2026-06-21). 타입체크 0 에러.
 
+## 빠른 시작 (npx · 권장)
+
+clone·빌드 없이 **명령어 한 줄**로 실행됩니다. data.go.kr 키 발급(아래 *사전 준비*)만 하면 됩니다.
+
+`claude_desktop_config.json` 에 추가:
+
+```jsonc
+{
+  "mcpServers": {
+    "korea-health": {
+      "command": "npx",
+      "args": ["-y", "dk-korea-health-mcp"],
+      "env": {
+        "DATA_GO_KR_SERVICE_KEY": "발급받은_키",
+        "KEY_IS_ENCODED": "true"
+      }
+    }
+  }
+}
+```
+
+> macOS 설정 경로: `~/Library/Application Support/Claude/claude_desktop_config.json` — 수정 후 Claude Desktop 을 완전히 종료했다 재시작하세요.
+> `KEY_IS_ENCODED` 는 일반인증키(Encoding)면 `"true"`, Decoding 키면 `"false"`.
+> 소스에서 직접 빌드하려면 아래 *설치·빌드·실행* 을 참고하세요.
+
 ## 제공 도구 (노출 10 = 도메인 8 + 메타 2, 숨김 1)
 
 | 도구 | 설명 | 데이터 출처 |
@@ -26,16 +51,16 @@
 ## 사전 준비 (직접 해야 함)
 
 1. [data.go.kr](https://www.data.go.kr) 회원가입
-2. 아래 각 서비스에서 **"활용신청"** (서비스별로 따로 승인, 대부분 자동승인):
-   - 건강보험심사평가원_비급여진료비정보조회서비스
-   - 건강보험심사평가원_병원정보서비스
-   - 건강보험심사평가원_의료기관별상세정보서비스
-   - 건강보험심사평가원_병원진료정보조회서비스
-   - 건강보험심사평가원_질병정보서비스
-   - 건강보험심사평가원_의약품사용정보조회서비스
-   - 식품의약품안전처_의약품개요정보(e약은요)
-   - 식품의약품안전처_의약품안전사용서비스(DUR)품목정보
-3. 발급된 서비스키를 `.env`에 설정 (`.env.example` 복사)
+2. 아래 각 서비스에서 **"활용신청"** (서비스별로 따로 승인, 대부분 자동승인·무료). 링크가 안 열리면 data.go.kr 검색창에 같은 이름을 붙여넣으세요:
+   - [건강보험심사평가원_비급여진료비정보](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20비급여진료비정보)
+   - [건강보험심사평가원_병원정보서비스](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20병원정보서비스)
+   - [건강보험심사평가원_의료기관별상세정보서비스](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20의료기관별상세정보서비스)
+   - [건강보험심사평가원_병원진료정보조회서비스](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20병원진료정보조회서비스)
+   - [건강보험심사평가원_질병정보서비스](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20질병정보서비스)
+   - [건강보험심사평가원_의약품사용정보조회서비스](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=건강보험심사평가원%20의약품사용정보조회서비스)
+   - [식품의약품안전처_의약품개요정보(e약은요)](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=의약품개요정보%20e약은요)
+   - [식품의약품안전처_의약품안전사용서비스(DUR)품목정보](https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=API&keyword=의약품%20DUR%20품목정보)
+3. 발급된 서비스키를 설정 — **(A) npx 사용 시** Claude Desktop 설정의 `env` 블록에(위 *빠른 시작*), **(B) 소스 빌드 시** `.env` 에 (`.env.example` 복사).
 
 ```bash
 cp .env.example .env
@@ -55,7 +80,9 @@ npm run typecheck  # tsc --noEmit
 npm run inspect    # MCP Inspector로 도구 테스트
 ```
 
-## Claude Desktop 연결
+## Claude Desktop 연결 (소스 빌드 시)
+
+> npx 로 쓰는 경우는 위 *빠른 시작* 을 사용하세요. 아래는 소스에서 직접 빌드한 경우입니다.
 
 `claude_desktop_config.json`에 추가 (키는 `.env`에서 자동 로드되므로 `env` 불필요):
 

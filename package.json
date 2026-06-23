@@ -11,6 +11,7 @@
     "dist"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "start": "node dist/index.js",
@@ -29,6 +30,13 @@
     "medical"
   ],
   "license": "MIT",
+  "author": "DK Medical Systems",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NSLC7779/dk-korea-health-mcp.git"
+  },
+  "homepage": "https://github.com/NSLC7779/dk-korea-health-mcp#readme",
+  "bugs": "https://github.com/NSLC7779/dk-korea-health-mcp/issues",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
     "dotenv": "^16.4.5",
